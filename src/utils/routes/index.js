@@ -1,28 +1,23 @@
 const routes = [
   {
-    path: "/overview",
-    context: "Overview",
+    path: "/dashboard",
+    context: "Dashboard",
     role: 'all'
-  },
-  {
-    path: "/projects",
-    context: "Projects",
-    role: 'Contractor'
   },
   {
     path: "/explore",
     context: "Explore",
-    role: 'Worker'
+    role: 'USER'
   },
   {
     path: "/requests",
     context: "Requests",
-    role: 'Worker'
+    role: 'USER'
   },
   {
-    path: "/my-profile",
-    context: "My Profile",
-    role: 'all'
+    path: "/administration",
+    context: "Administration",
+    role: 'ADMIN'
   }
 ];
 

@@ -42,6 +42,55 @@ ul
 .component-container
   padding: 30px
 
+.highlight
+  color: $primary-color
+  font-weight: 700
+  cursor: pointer
+
+.table-container
+  margin-top: 40px
+  background: rgb(233, 233, 233)
+  border-radius: 0.4rem
+  padding: 20px
+
+  .table
+    &>:not(caption)>*>*
+      padding: 1rem
+
+    &>tbody>tr:nth-of-type(odd)
+      background: whitesmoke
+
+  table
+    margin: 0
+    border: 0
+    & > *
+
+    tbody, td, tfoot, th, thead, tr
+      border: 0
+
+    thead
+      background: #fff
+      padding: 40px
+
+      .header-row
+        border: 1px solid #e3e3e3
+
+    tbody
+      tr
+        cursor: pointer
+        &:hover
+          background: #fff
+        .status
+          background: #d71313
+          padding: 4px 10px
+          color: #fff
+          font-weight: 800
+          font-size: .8rem
+          display: inline-block
+          border-radius: .2rem
+          &.active
+            background: #00a139
+
 @media (min-width: 992px)
   .component-container
     padding: 40px 60px

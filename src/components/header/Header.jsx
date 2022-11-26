@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import s from "./css/Header.module.sass";
 
 function Header({logout, doToggle}) {
-  const username = "Ife Jeremiah";
+  const username = "";
 
 
   return (
@@ -18,7 +18,7 @@ function Header({logout, doToggle}) {
 
         <div className="con-middle">
           <div className="middle">
-            <div className={s.logo}>BrickX</div>
+            <div className={s.logo}>Bug Tracker</div>
           </div>
         </div>
 
