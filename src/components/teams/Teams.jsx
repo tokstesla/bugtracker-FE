@@ -3,10 +3,11 @@ import { useFormik } from "formik";
 import React from "react";
 import { teamData } from "schema/teamsSchema";
 
-function Teams({ allMembers, allUsers }) {
+function Teams({ allMembers, allUsers, addMembers }) {
   async function onSubmit(values) {
-    console.log(JSON.stringify(values, null, 2));
+    // console.log(JSON.stringify(values, null, 2));
     // await service.createProject(values);
+    addMembers(values);
     teamsForm.resetForm();
   }
 
@@ -44,9 +45,9 @@ function Teams({ allMembers, allUsers }) {
                     value={teamsForm.values.assigned_devs}
                     onChange={teamsForm.handleChange}
                   >
-                    {allMembers.map((member, key) => (
+                    {allUsers.map((member, key) => (
                       <option key={key} value={key + 1}>
-                        {member}
+                        {member.name}
                       </option>
                     ))}
                   </select>
@@ -80,7 +81,7 @@ function Teams({ allMembers, allUsers }) {
       </div>
 
       <div className="con-context table-container">
-        {allUsers ? (
+        {allMembers ? (
           <div className="table-responsive">
             <table className="table">
               <thead>
@@ -92,7 +93,7 @@ function Teams({ allMembers, allUsers }) {
                 </tr>
               </thead>
               <tbody>
-                {allUsers.map((elem, key) => (
+                {allMembers.map((elem, key) => (
                   <tr key={key}>
                     <td>{key + 1}</td>
                     <td>{elem.name}</td>

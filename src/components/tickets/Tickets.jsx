@@ -93,7 +93,7 @@ function Tickets({ allMembers, allTickets }) {
                     >
                       {allMembers.map((member, key) => (
                         <option key={key} value={key + 1}>
-                          {member}
+                          {member.name}
                         </option>
                       ))}
                     </select>
@@ -241,16 +241,16 @@ function Tickets({ allMembers, allTickets }) {
                   {allTickets.map((elem, key) => (
                     <tr key={key}>
                       <td>
-                        <Link to="/projects/id">{key + 1}</Link>
+                        <Link to="/projects/tickets/id">{key + 1}</Link>
                       </td>
                       <td>
-                        <Link to="/projects/id">{elem.title}</Link>
+                        <Link to="/projects/tickets/id">{elem.title}</Link>
                       </td>
                       <td>
-                        <Link to="/projects/id">{elem.description}</Link>
+                        <Link to="/projects/tickets/id">{elem.description}</Link>
                       </td>
                       <td>
-                        <Link to="/projects/id">{elem.author}</Link>
+                        <Link to="/projects/tickets/id">{elem.author}</Link>
                       </td>
                     </tr>
                   ))}

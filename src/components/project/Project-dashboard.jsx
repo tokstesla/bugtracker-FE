@@ -115,7 +115,7 @@ function Project({ allMembers }) {
                   >
                     {allMembers.map((member, key) => (
                       <option key={key} value={key + 1}>
-                        {member}
+                        {member.name}
                       </option>
                     ))}
                   </select>

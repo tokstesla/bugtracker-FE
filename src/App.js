@@ -28,25 +28,61 @@ function App() {
 
   const token = localStorage.getItem("auth-token");
 
-  const allMembers = ["John Doe", "Muru Baba", "Tochukwu Joseph", "Abgolade"];
+  const [allUsers, setAllUsers] = useState([
+    {
+      name: "Ife Jeremiah",
+      email: "0006@gmail.com",
+      phoneNumber: "1234567890",
+    },
+    {
+      name: "Sack Smith",
+      email: "0002@gmail.com",
+      phoneNumber: "1234567890",
+    },
+    {
+      name: "Eli Jones",
+      email: "0005@gmail.com",
+      phoneNumber: "1234567890",
+    },
+  ]);
 
-  const allUsers = [
+  const [allMembers, setAllMembers] = useState([
     {
-      name: "Ife Jeremiah",
-      email: "0002@gmail.com",
+      name: "John Doe",
+      email: "0001@gmail.com",
       phoneNumber: "1234567890",
     },
     {
-      name: "Ife Jeremiah",
-      email: "0002@gmail.com",
+      name: "Ali Halman",
+      email: "0003@gmail.com",
       phoneNumber: "1234567890",
     },
     {
-      name: "Ife Jeremiah",
-      email: "0002@gmail.com",
+      name: "Smith Abraham",
+      email: "0004@gmail.com",
       phoneNumber: "1234567890",
     },
-  ];
+  ]);
+
+  function doSetAllMembers(values) {
+    console.log(
+      "value of value",
+
+      values.assigned_devs.forEach((elem) =>
+        console.log("heewsdfdjslk", allUsers[Number(elem)])
+      )
+    );
+
+    setAllMembers([
+      ...allMembers,
+      values.assigned_devs.map((elem) => allUsers[Number(elem)]),
+    ]);
+    console.log("new members", allMembers);
+  }
+
+  function doSetAllUsers(values) {
+    console.log("value of values", values);
+  }
 
   const tickets = [
     {
@@ -126,6 +162,7 @@ function App() {
                   allMembers={allMembers}
                   allTickets={tickets}
                   allUsers={allUsers}
+                  addMembers={doSetAllMembers}
                 />
               }
             />
@@ -134,7 +171,7 @@ function App() {
               element={<Tickets allMembers={allMembers} allTickets={tickets} />}
             />
             <Route path="/administration" element={<Admin />} />
-            <Route path="/projects/id" element={<ProjectData />} />
+            <Route path="/projects/tickets/id" element={<ProjectData allMembers={allMembers} />} />
             <Route
               path="/my-profile"
               element={<Profile payload={getPayload()} />}

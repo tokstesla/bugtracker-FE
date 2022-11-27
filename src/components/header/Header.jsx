@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 import s from "./css/Header.module.sass";
 
-function Header({logout, doToggle}) {
+function Header({ logout, doToggle }) {
   const username = "";
-
 
   return (
     <div className={`${s.header_container} mb-2`}>
@@ -18,7 +17,15 @@ function Header({logout, doToggle}) {
 
         <div className="con-middle">
           <div className="middle">
-            <div className={s.logo}>Bug Tracker</div>
+            <div className={`${s.logo} d-flex align-items-center justify-content-center gap-1`}>
+              Bug Tracker
+              <div className="img">
+                <img
+                  src="https://mufasa.interswitchng.com/p/favicons/favicon_isw.png"
+                  alt=""
+                />
+              </div>
+            </div>
           </div>
         </div>
 
@@ -39,7 +46,11 @@ function Header({logout, doToggle}) {
                 ></div>
                 <ul className="dropdown-menu">
                   <li>
-                    <Link className="dropdown-item" to="/login" onClick={logout}>
+                    <Link
+                      className="dropdown-item"
+                      to="/login"
+                      onClick={logout}
+                    >
                       Logout
                     </Link>
                   </li>
