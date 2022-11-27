@@ -37,12 +37,11 @@ function ProjectData({ allMembers, payload }) {
           <Previous />
         </div>
 
-        {payload.role === "ADMIN" ? (
           <>
             <div className="con-edit">
               <Button
                 type="primary"
-                text="New Ticket"
+                text="Edit Ticket"
                 modal
                 modalHeaderTitle="Edit Ticket"
                 modalTarget="ticket-edit"
@@ -236,7 +235,6 @@ function ProjectData({ allMembers, payload }) {
               />
             </div>
           </>
-        ) : null}
       </div>
 
       <div className="section-b">
@@ -257,7 +255,7 @@ function ProjectData({ allMembers, payload }) {
 
               <div className="con-date flex">
                 <h3>Status:</h3>
-                <p>{tickets.status}</p>
+                <p>{tickets.status.toLowerCase()}</p>
               </div>
 
               <div className="con-date flex">
@@ -268,11 +266,6 @@ function ProjectData({ allMembers, payload }) {
               <div className="con-duration flex">
                 <h3>Hours to Complete:</h3>
                 <p>{tickets.date}</p>
-              </div>
-
-              <div className="con-apply flex">
-                <h3>No. of Applicants:</h3>
-                <p>{tickets.applicants}</p>
               </div>
             </div>
           </div>

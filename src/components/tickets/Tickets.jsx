@@ -28,7 +28,6 @@ function Tickets({ allMembers, allTickets, payload }) {
             <h2>Tickets</h2>
           </div>
 
-          {payload.role === "ADMIN" ? (
             <>
               <div className="header-btn">
                 <Button
@@ -231,7 +230,6 @@ function Tickets({ allMembers, allTickets, payload }) {
                 />
               </div>
             </>
-          ) : null}
         </div>
 
         <div className="con-context table-container">

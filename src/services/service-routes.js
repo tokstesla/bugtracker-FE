@@ -4,7 +4,7 @@ const projectRoute = '/api'
 const _routes = {
   login: `${authRoute}/signin`,
   register: `${authRoute}/signup`,
-  projects: `${projectRoute}/projects`
+  projects: `${projectRoute}/members`,
 }
 
 export default _routes;

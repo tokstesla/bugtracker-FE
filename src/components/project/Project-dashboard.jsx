@@ -7,34 +7,24 @@ import "./css/Project.sass";
 import { useState } from "react";
 import service from "services/service";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 function Project({ allMembers, payload }) {
   service.setPageTitle("Projects");
 
-  const [projects, setProject] = useState([
-    {
-      name: "Renewable Energy Consult",
-      description:
-        "Customers need a platform where they can have access to businesses operating renewable energy installations",
-      members: [1, 2, 3],
-    },
-    {
-      name: "Car pask locator",
-      description:
-        "Customers should be able to locate available car parking spaces within their locality",
-      members: [],
-    },
-    {
-      name: "Gym Instructor",
-      description: "Locate a professional gym instrutor closest to you",
-      members: [2, 2, 1],
-    },
-  ]);
+  const [projects, setProject] = useState([]);
+
+  useEffect(() => {
+    async function getAllProjects() {
+      const projects = await service.getAllProjects();
+      setProject([...projects.content]);
+    }
+    getAllProjects();
+  }, []);
 
   async function onSubmit(values) {
-    console.log(JSON.stringify(values, null, 2));
-    // await service.createProject(values);
     setProject([values, ...projects]);
+    await service.createProject(values);
     formik.resetForm();
   }
 
