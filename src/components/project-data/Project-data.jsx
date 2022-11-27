@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import service from "services/service";
 import "./css/Project-data.sass";
 
-function ProjectData({ allMembers }) {
+function ProjectData({ allMembers, payload }) {
   const [tickets, setTickets] = useState({
     title: "Ticket 1",
     description: "first ticket",
@@ -36,201 +36,207 @@ function ProjectData({ allMembers }) {
         <div className="con-previous">
           <Previous />
         </div>
-        <div className="con-edit">
-          <Button
-            type="primary"
-            text="New Ticket"
-            modal
-            modalHeaderTitle="Edit Ticket"
-            modalTarget="ticket-edit"
-            modalContext={
-              <form className="my-4">
-                <div className="mb-3">
-                  <label htmlFor="title" className="form-label">
-                    Title
-                  </label>
-                  <input
-                    id="title"
-                    name="title"
-                    type="text"
-                    className="form-control"
-                    onChange={ticketForm.handleChange}
-                    value={ticketForm.values.title}
-                  />
 
-                  <p className="invalid-data">
-                    {ticketForm.errors.title && ticketForm.touched.title
-                      ? ticketForm.errors.title
-                      : null}
-                  </p>
-                </div>
+        {payload.role === "ADMIN" ? (
+          <>
+            <div className="con-edit">
+              <Button
+                type="primary"
+                text="New Ticket"
+                modal
+                modalHeaderTitle="Edit Ticket"
+                modalTarget="ticket-edit"
+                modalContext={
+                  <form className="my-4">
+                    <div className="mb-3">
+                      <label htmlFor="title" className="form-label">
+                        Title
+                      </label>
+                      <input
+                        id="title"
+                        name="title"
+                        type="text"
+                        className="form-control"
+                        onChange={ticketForm.handleChange}
+                        value={ticketForm.values.title}
+                      />
 
-                <div className="mb-3">
-                  <label htmlFor="description" className="form-label">
-                    Description
-                  </label>
-                  <textarea
-                    id="description"
-                    name="description"
-                    type="text"
-                    className="form-control"
-                    onChange={ticketForm.handleChange}
-                    value={ticketForm.values.description}
-                  />
+                      <p className="invalid-data">
+                        {ticketForm.errors.title && ticketForm.touched.title
+                          ? ticketForm.errors.title
+                          : null}
+                      </p>
+                    </div>
 
-                  <p className="invalid-data">
-                    {ticketForm.errors.description &&
-                    ticketForm.touched.description
-                      ? ticketForm.errors.description
-                      : null}
-                  </p>
-                </div>
+                    <div className="mb-3">
+                      <label htmlFor="description" className="form-label">
+                        Description
+                      </label>
+                      <textarea
+                        id="description"
+                        name="description"
+                        type="text"
+                        className="form-control"
+                        onChange={ticketForm.handleChange}
+                        value={ticketForm.values.description}
+                      />
 
-                <div className="mb-3">
-                  <label htmlFor="assigned_devs" className="form-label">
-                    Add Team Members
-                  </label>
+                      <p className="invalid-data">
+                        {ticketForm.errors.description &&
+                        ticketForm.touched.description
+                          ? ticketForm.errors.description
+                          : null}
+                      </p>
+                    </div>
 
-                  <select
-                    multiple
-                    name="assigned_devs"
-                    id="assigned_devs"
-                    className="form-control"
-                    value={ticketForm.values.assigned_devs}
-                    onChange={ticketForm.handleChange}
-                  >
-                    {allMembers.map((member, key) => (
-                      <option key={key} value={key + 1}>
-                        {member.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                    <div className="mb-3">
+                      <label htmlFor="assigned_devs" className="form-label">
+                        Add Team Members
+                      </label>
 
-                <div className="mb-3">
-                  <label htmlFor="date" className="form-label">
-                    Time Estimate (Hours)
-                  </label>
-                  <input
-                    id="date"
-                    name="date"
-                    type="number"
-                    className="form-control"
-                    onChange={ticketForm.handleChange}
-                    value={ticketForm.values.date}
-                  />
+                      <select
+                        multiple
+                        name="assigned_devs"
+                        id="assigned_devs"
+                        className="form-control"
+                        value={ticketForm.values.assigned_devs}
+                        onChange={ticketForm.handleChange}
+                      >
+                        {allMembers.map((member, key) => (
+                          <option key={key} value={key + 1}>
+                            {member.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
 
-                  <p className="invalid-data">
-                    {ticketForm.errors.date && ticketForm.touched.date
-                      ? ticketForm.errors.date
-                      : null}
-                  </p>
-                </div>
+                    <div className="mb-3">
+                      <label htmlFor="date" className="form-label">
+                        Time Estimate (Hours)
+                      </label>
+                      <input
+                        id="date"
+                        name="date"
+                        type="number"
+                        className="form-control"
+                        onChange={ticketForm.handleChange}
+                        value={ticketForm.values.date}
+                      />
 
-                <div className="mb-3">
-                  <label htmlFor="type" className="form-label">
-                    Type
-                  </label>
+                      <p className="invalid-data">
+                        {ticketForm.errors.date && ticketForm.touched.date
+                          ? ticketForm.errors.date
+                          : null}
+                      </p>
+                    </div>
 
-                  <select
-                    name="type"
-                    id="type"
-                    className="form-control"
-                    value={ticketForm.values.type}
-                    onChange={ticketForm.handleChange}
-                  >
-                    <option defaultValue="">Select type</option>
-                    <option value="IMMEDIATE">Issue</option>
-                    <option value="BUG">Bug</option>
-                    <option value="ERROR">Error</option>
-                    <option value="FEATURE_REQUEST">Feature request</option>
-                    <option value="OTHER">Other</option>
-                  </select>
+                    <div className="mb-3">
+                      <label htmlFor="type" className="form-label">
+                        Type
+                      </label>
 
-                  <p className="invalid-data">
-                    {ticketForm.errors.type && ticketForm.touched.type
-                      ? ticketForm.errors.type
-                      : null}
-                  </p>
-                </div>
+                      <select
+                        name="type"
+                        id="type"
+                        className="form-control"
+                        value={ticketForm.values.type}
+                        onChange={ticketForm.handleChange}
+                      >
+                        <option defaultValue="">Select type</option>
+                        <option value="IMMEDIATE">Issue</option>
+                        <option value="BUG">Bug</option>
+                        <option value="ERROR">Error</option>
+                        <option value="FEATURE_REQUEST">Feature request</option>
+                        <option value="OTHER">Other</option>
+                      </select>
 
-                <div className="mb-3">
-                  <label htmlFor="priority" className="form-label">
-                    Priority
-                  </label>
+                      <p className="invalid-data">
+                        {ticketForm.errors.type && ticketForm.touched.type
+                          ? ticketForm.errors.type
+                          : null}
+                      </p>
+                    </div>
 
-                  <select
-                    name="priority"
-                    id="priority"
-                    className="form-control"
-                    value={ticketForm.values.priority}
-                    onChange={ticketForm.handleChange}
-                  >
-                    <option defaultValue="">Select priority</option>
-                    <option value="LOW">Low</option>
-                    <option value="MEDIUM">Medium</option>
-                    <option value="HIGH">High</option>
-                    <option value="IMMEDIATE">Immediate</option>
-                  </select>
+                    <div className="mb-3">
+                      <label htmlFor="priority" className="form-label">
+                        Priority
+                      </label>
 
-                  <p className="invalid-data">
-                    {ticketForm.errors.priority && ticketForm.touched.priority
-                      ? ticketForm.errors.priority
-                      : null}
-                  </p>
-                </div>
+                      <select
+                        name="priority"
+                        id="priority"
+                        className="form-control"
+                        value={ticketForm.values.priority}
+                        onChange={ticketForm.handleChange}
+                      >
+                        <option defaultValue="">Select priority</option>
+                        <option value="LOW">Low</option>
+                        <option value="MEDIUM">Medium</option>
+                        <option value="HIGH">High</option>
+                        <option value="IMMEDIATE">Immediate</option>
+                      </select>
 
-                <div className="mb-3">
-                  <label htmlFor="status" className="form-label">
-                    Status
-                  </label>
+                      <p className="invalid-data">
+                        {ticketForm.errors.priority &&
+                        ticketForm.touched.priority
+                          ? ticketForm.errors.priority
+                          : null}
+                      </p>
+                    </div>
 
-                  <select
-                    name="status"
-                    id="status"
-                    className="form-control"
-                    value={ticketForm.values.status}
-                    onChange={ticketForm.handleChange}
-                  >
-                    <option defaultValue="">Select status</option>
-                    <option value="NEW">New</option>
-                    <option value="OPEN">Open</option>
-                    <option value="IN_PROGRESS">In Progress</option>
-                    <option value="RESOLVED">Resolved</option>
-                  </select>
+                    <div className="mb-3">
+                      <label htmlFor="status" className="form-label">
+                        Status
+                      </label>
 
-                  <p className="invalid-data">
-                    {ticketForm.errors.status && ticketForm.touched.status
-                      ? ticketForm.errors.status
-                      : null}
-                  </p>
-                </div>
-              </form>
-            }
-            modalFooterBtn={
-              <>
-                <button
-                  data-bs-dismiss="modal"
-                  className="secondary-btn"
-                  onClick={ticketForm.resetForm}
-                >
-                  Close
-                </button>
+                      <select
+                        name="status"
+                        id="status"
+                        className="form-control"
+                        value={ticketForm.values.status}
+                        onChange={ticketForm.handleChange}
+                      >
+                        <option defaultValue="">Select status</option>
+                        <option value="NEW">New</option>
+                        <option value="OPEN">Open</option>
+                        <option value="IN_PROGRESS">In Progress</option>
+                        <option value="RESOLVED">Resolved</option>
+                      </select>
 
-                <button
-                  type="submit"
-                  className="primary-btn"
-                  onClick={ticketForm.handleSubmit}
-                  data-bs-dismiss={
-                    ticketForm.isValid && ticketForm.dirty ? "modal" : null
-                  }
-                >
-                  Next
-                </button>
-              </>
-            }
-          />
-        </div>
+                      <p className="invalid-data">
+                        {ticketForm.errors.status && ticketForm.touched.status
+                          ? ticketForm.errors.status
+                          : null}
+                      </p>
+                    </div>
+                  </form>
+                }
+                modalFooterBtn={
+                  <>
+                    <button
+                      data-bs-dismiss="modal"
+                      className="secondary-btn"
+                      onClick={ticketForm.resetForm}
+                    >
+                      Close
+                    </button>
+
+                    <button
+                      type="submit"
+                      className="primary-btn"
+                      onClick={ticketForm.handleSubmit}
+                      data-bs-dismiss={
+                        ticketForm.isValid && ticketForm.dirty ? "modal" : null
+                      }
+                    >
+                      Next
+                    </button>
+                  </>
+                }
+              />
+            </div>
+          </>
+        ) : null}
       </div>
 
       <div className="section-b">
@@ -239,22 +245,29 @@ function ProjectData({ allMembers }) {
             <div className="details-card">
               <div className="header d-flex align-items-center justify-content-between mb-3">
                 <h3 className="title">{tickets.title}</h3>
-                <div className={`status ${tickets.priority}`}>{tickets.priority}</div>
+                <div className={`status ${tickets.priority}`}>
+                  {tickets.priority}
+                </div>
               </div>
 
               <div className="con-budget flex">
-                <h3>Budget:</h3>
-                <p>{tickets.budget}</p>
+                <h3>Description:</h3>
+                <p>{tickets.description}</p>
               </div>
 
               <div className="con-date flex">
-                <h3>Start Date:</h3>
-                <p>{tickets.start_date}</p>
+                <h3>Status:</h3>
+                <p>{tickets.status}</p>
+              </div>
+
+              <div className="con-date flex">
+                <h3>Type of Ticket:</h3>
+                <p>{tickets.type}</p>
               </div>
 
               <div className="con-duration flex">
-                <h3>Duration:</h3>
-                <p>{tickets.duration}</p>
+                <h3>Hours to Complete:</h3>
+                <p>{tickets.date}</p>
               </div>
 
               <div className="con-apply flex">
@@ -270,407 +283,23 @@ function ProjectData({ allMembers }) {
         <div>
           <Button
             type="primary"
-            text="View all applicants"
-            modal={true}
-            modalHeaderTitle="All Project Applicants"
-            modalTarget="view-all-applicants"
-            modalContext={
-              <div className="con-applicant">
-                <Link
-                  to="/my-profile?search=view?select=check"
-                  data-bs-dismiss="modal"
-                >
-                  <div className="applicant-card d-flex align-items-center justify-content-between">
-                    <div className="con-left">
-                      <div className="con-img">
-                        <img
-                          src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                          alt=""
-                        />
-                      </div>
-                      <div className="con-text">
-                        <h3 className="name">John Doe</h3>
-                        <p className="title">Manager</p>
-                      </div>
-                    </div>
-
-                    <div className="con-right">
-                      <p>View Profile</p>
-                    </div>
-                  </div>
-                </Link>
-
-                <Link to="/my-profile?select=check" data-bs-dismiss="modal">
-                  <div className="applicant-card d-flex align-items-center justify-content-between">
-                    <div className="con-left">
-                      <div className="con-img">
-                        <img
-                          src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                          alt=""
-                        />
-                      </div>
-                      <div className="con-text">
-                        <h3 className="name">John Doe</h3>
-                        <p className="title">Manager</p>
-                      </div>
-                    </div>
-
-                    <div className="con-right">
-                      <p>View Profile</p>
-                    </div>
-                  </div>
-                </Link>
-
-                <Link to="/my-profile?select=check" data-bs-dismiss="modal">
-                  <div className="applicant-card d-flex align-items-center justify-content-between">
-                    <div className="con-left">
-                      <div className="con-img">
-                        <img
-                          src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                          alt=""
-                        />
-                      </div>
-                      <div className="con-text">
-                        <h3 className="name">John Doe</h3>
-                        <p className="title">Manager</p>
-                      </div>
-                    </div>
-
-                    <div className="con-right">
-                      <p>View Profile</p>
-                    </div>
-                  </div>
-                </Link>
-                <Link to="/my-profile?select=check" data-bs-dismiss="modal">
-                  <div className="applicant-card d-flex align-items-center justify-content-between">
-                    <div className="con-left">
-                      <div className="con-img">
-                        <img
-                          src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                          alt=""
-                        />
-                      </div>
-                      <div className="con-text">
-                        <h3 className="name">John Doe</h3>
-                        <p className="title">Manager</p>
-                      </div>
-                    </div>
-
-                    <div className="con-right">
-                      <p>View Profile</p>
-                    </div>
-                  </div>
-                </Link>
-                <Link to="/my-profile?select=check" data-bs-dismiss="modal">
-                  <div className="applicant-card d-flex align-items-center justify-content-between">
-                    <div className="con-left">
-                      <div className="con-img">
-                        <img
-                          src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                          alt=""
-                        />
-                      </div>
-                      <div className="con-text">
-                        <h3 className="name">John Doe</h3>
-                        <p className="title">Manager</p>
-                      </div>
-                    </div>
-
-                    <div className="con-right">
-                      <p>View Profile</p>
-                    </div>
-                  </div>
-                </Link>
-                <Link to="/my-profile?select=check" data-bs-dismiss="modal">
-                  <div className="applicant-card d-flex align-items-center justify-content-between">
-                    <div className="con-left">
-                      <div className="con-img">
-                        <img
-                          src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                          alt=""
-                        />
-                      </div>
-                      <div className="con-text">
-                        <h3 className="name">John Doe</h3>
-                        <p className="title">Manager</p>
-                      </div>
-                    </div>
-
-                    <div className="con-right">
-                      <p>View Profile</p>
-                    </div>
-                  </div>
-                </Link>
-                <Link to="/my-profile?select=check" data-bs-dismiss="modal">
-                  <div className="applicant-card d-flex align-items-center justify-content-between">
-                    <div className="con-left">
-                      <div className="con-img">
-                        <img
-                          src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                          alt=""
-                        />
-                      </div>
-                      <div className="con-text">
-                        <h3 className="name">John Doe</h3>
-                        <p className="title">Manager</p>
-                      </div>
-                    </div>
-
-                    <div className="con-right">
-                      <p>View Profile</p>
-                    </div>
-                  </div>
-                </Link>
-                <Link to="/my-profile?select=check" data-bs-dismiss="modal">
-                  <div className="applicant-card d-flex align-items-center justify-content-between">
-                    <div className="con-left">
-                      <div className="con-img">
-                        <img
-                          src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                          alt=""
-                        />
-                      </div>
-                      <div className="con-text">
-                        <h3 className="name">John Doe</h3>
-                        <p className="title">Manager</p>
-                      </div>
-                    </div>
-
-                    <div className="con-right">
-                      <p>View Profile</p>
-                    </div>
-                  </div>
-                </Link>
-                <Link to="/my-profile?select=check" data-bs-dismiss="modal">
-                  <div className="applicant-card d-flex align-items-center justify-content-between">
-                    <div className="con-left">
-                      <div className="con-img">
-                        <img
-                          src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                          alt=""
-                        />
-                      </div>
-                      <div className="con-text">
-                        <h3 className="name">John Doe</h3>
-                        <p className="title">Manager</p>
-                      </div>
-                    </div>
-
-                    <div className="con-right">
-                      <p>View Profile</p>
-                    </div>
-                  </div>
-                </Link>
-                <Link to="/my-profile?select=check" data-bs-dismiss="modal">
-                  <div className="applicant-card d-flex align-items-center justify-content-between">
-                    <div className="con-left">
-                      <div className="con-img">
-                        <img
-                          src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                          alt=""
-                        />
-                      </div>
-                      <div className="con-text">
-                        <h3 className="name">John Doe</h3>
-                        <p className="title">Manager</p>
-                      </div>
-                    </div>
-
-                    <div className="con-right">
-                      <p>View Profile</p>
-                    </div>
-                  </div>
-                </Link>
-                <Link to="/my-profile?select=check" data-bs-dismiss="modal">
-                  <div className="applicant-card d-flex align-items-center justify-content-between">
-                    <div className="con-left">
-                      <div className="con-img">
-                        <img
-                          src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                          alt=""
-                        />
-                      </div>
-                      <div className="con-text">
-                        <h3 className="name">John Doe</h3>
-                        <p className="title">Manager</p>
-                      </div>
-                    </div>
-
-                    <div className="con-right">
-                      <p>View Profile</p>
-                    </div>
-                  </div>
-                </Link>
-                <Link to="/my-profile?select=check" data-bs-dismiss="modal">
-                  <div className="applicant-card d-flex align-items-center justify-content-between">
-                    <div className="con-left">
-                      <div className="con-img">
-                        <img
-                          src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                          alt=""
-                        />
-                      </div>
-                      <div className="con-text">
-                        <h3 className="name">John Doe</h3>
-                        <p className="title">Manager</p>
-                      </div>
-                    </div>
-
-                    <div className="con-right">
-                      <p>View Profile</p>
-                    </div>
-                  </div>
-                </Link>
-                <Link to="/my-profile?select=check" data-bs-dismiss="modal">
-                  <div className="applicant-card d-flex align-items-center justify-content-between">
-                    <div className="con-left">
-                      <div className="con-img">
-                        <img
-                          src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                          alt=""
-                        />
-                      </div>
-                      <div className="con-text">
-                        <h3 className="name">John Doe</h3>
-                        <p className="title">Manager</p>
-                      </div>
-                    </div>
-
-                    <div className="con-right">
-                      <p>View Profile</p>
-                    </div>
-                  </div>
-                </Link>
-                <Link to="/my-profile?select=check" data-bs-dismiss="modal">
-                  <div className="applicant-card d-flex align-items-center justify-content-between">
-                    <div className="con-left">
-                      <div className="con-img">
-                        <img
-                          src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                          alt=""
-                        />
-                      </div>
-                      <div className="con-text">
-                        <h3 className="name">John Doe</h3>
-                        <p className="title">Manager</p>
-                      </div>
-                    </div>
-
-                    <div className="con-right">
-                      <p>View Profile</p>
-                    </div>
-                  </div>
-                </Link>
-                <Link to="/my-profile?select=check" data-bs-dismiss="modal">
-                  <div className="applicant-card d-flex align-items-center justify-content-between">
-                    <div className="con-left">
-                      <div className="con-img">
-                        <img
-                          src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                          alt=""
-                        />
-                      </div>
-                      <div className="con-text">
-                        <h3 className="name">John Doe</h3>
-                        <p className="title">Manager</p>
-                      </div>
-                    </div>
-
-                    <div className="con-right">
-                      <p>View Profile</p>
-                    </div>
-                  </div>
-                </Link>
-                <Link to="/my-profile?select=check" data-bs-dismiss="modal">
-                  <div className="applicant-card d-flex align-items-center justify-content-between">
-                    <div className="con-left">
-                      <div className="con-img">
-                        <img
-                          src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                          alt=""
-                        />
-                      </div>
-                      <div className="con-text">
-                        <h3 className="name">John Doe</h3>
-                        <p className="title">Manager</p>
-                      </div>
-                    </div>
-
-                    <div className="con-right">
-                      <p>View Profile</p>
-                    </div>
-                  </div>
-                </Link>
-                <Link to="/my-profile?select=check" data-bs-dismiss="modal">
-                  <div className="applicant-card d-flex align-items-center justify-content-between">
-                    <div className="con-left">
-                      <div className="con-img">
-                        <img
-                          src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                          alt=""
-                        />
-                      </div>
-                      <div className="con-text">
-                        <h3 className="name">John Doe</h3>
-                        <p className="title">Manager</p>
-                      </div>
-                    </div>
-
-                    <div className="con-right">
-                      <p>View Profile</p>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-            }
-            modalFooterBtn={
-              <>
-                <button data-bs-dismiss="modal" className="primary-btn">
-                  Done
-                </button>
-              </>
-            }
-          />
-        </div>
-
-        <div>
-          <Button
-            type="primary"
-            text="View all workers"
+            text="View all Team Members"
             modal
-            modalHeaderTitle="All Active Workers on Project"
-            modalTarget="view-all-workers"
+            modalHeaderTitle="All Members on Ticket"
+            modalTarget="view-all-members"
             modalContext={
               <div className="con-applicant">
-                <Link to="/my-profile?search=view" data-bs-dismiss="modal">
-                  <div className="applicant-card d-flex align-items-center gap-3">
-                    <div className="con-img">
-                      <img
-                        src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                        alt=""
-                      />
-                    </div>
+                {allMembers.map((member, key) => (
+                  <div
+                    key={key}
+                    className="applicant-card d-flex align-items-center gap-3"
+                  >
                     <div className="con-text">
-                      <h3 className="name">John Doe</h3>
-                      <p className="title">Manager</p>
+                      <h3 className="name">{member.name}</h3>
+                      <p className="title">{member.email}</p>
                     </div>
                   </div>
-                </Link>
-
-                <Link to="/my-profile?search=view" data-bs-dismiss="modal">
-                  <div className="applicant-card d-flex align-items-center gap-3">
-                    <div className="con-img">
-                      <img
-                        src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                        alt=""
-                      />
-                    </div>
-                    <div className="con-text">
-                      <h3 className="name">John Doe</h3>
-                      <p className="title">Manager</p>
-                    </div>
-                  </div>
-                </Link>
+                ))}
               </div>
             }
             modalFooterBtn={

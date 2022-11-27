@@ -153,7 +153,9 @@ function App() {
           >
             <Route
               path="/dashboard"
-              element={<Project allMembers={allMembers} />}
+              element={
+                <Project allMembers={allMembers} payload={getPayload()} />
+              }
             />
             <Route
               path="/projects/tickets"
@@ -163,6 +165,7 @@ function App() {
                   allTickets={tickets}
                   allUsers={allUsers}
                   addMembers={doSetAllMembers}
+                  payload={getPayload()}
                 />
               }
             />
@@ -171,7 +174,10 @@ function App() {
               element={<Tickets allMembers={allMembers} allTickets={tickets} />}
             />
             <Route path="/administration" element={<Admin />} />
-            <Route path="/projects/tickets/id" element={<ProjectData allMembers={allMembers} />} />
+            <Route
+              path="/projects/tickets/id"
+              element={<ProjectData allMembers={allMembers} payload={getPayload()}/>}
+            />
             <Route
               path="/my-profile"
               element={<Profile payload={getPayload()} />}

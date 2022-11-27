@@ -3,7 +3,13 @@ import Teams from "components/teams/Teams";
 import Tickets from "components/tickets/Tickets";
 import React from "react";
 
-function ProjectTickets({ allMembers, allTickets, allUsers, addMembers }) {
+function ProjectTickets({
+  allMembers,
+  allTickets,
+  allUsers,
+  addMembers,
+  payload,
+}) {
   return (
     <div id="ProjectTickets_Main_Container" className="component-container">
       <Previous />
@@ -13,10 +19,15 @@ function ProjectTickets({ allMembers, allTickets, allUsers, addMembers }) {
             allUsers={allUsers}
             allMembers={allMembers}
             addMembers={addMembers}
+            payload={payload}
           />
         </div>
         <div className="ms-lg-4">
-          <Tickets allMembers={allMembers} allTickets={allTickets} />
+          <Tickets
+            allMembers={allMembers}
+            allTickets={allTickets}
+            payload={payload}
+          />
         </div>
       </div>
     </div>

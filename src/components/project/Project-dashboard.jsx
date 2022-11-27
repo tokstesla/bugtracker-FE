@@ -8,7 +8,7 @@ import { useState } from "react";
 import service from "services/service";
 import { Link } from "react-router-dom";
 
-function Project({ allMembers }) {
+function Project({ allMembers, payload }) {
   service.setPageTitle("Projects");
 
   const [projects, setProject] = useState([
@@ -51,101 +51,105 @@ function Project({ allMembers }) {
           <h2>Projects</h2>
         </div>
 
-        <div className="header-btn">
-          <Button
-            type="primary"
-            text="New Project"
-            modal={true}
-            modalHeaderTitle="Create New Project"
-            modalTarget="new-project-create"
-            modalContext={
-              <form className="my-4">
-                <div className="mb-3">
-                  <label htmlFor="title" className="form-label">
-                    Project Name
-                  </label>
-                  <input
-                    id="title"
-                    name="name"
-                    type="text"
-                    className="form-control"
-                    onChange={formik.handleChange}
-                    value={formik.values.name}
-                  />
+        {payload.role === "ADMIN" ? (
+          <>
+            <div className="header-btn">
+              <Button
+                type="primary"
+                text="New Project"
+                modal={true}
+                modalHeaderTitle="Create New Project"
+                modalTarget="new-project-create"
+                modalContext={
+                  <form className="my-4">
+                    <div className="mb-3">
+                      <label htmlFor="title" className="form-label">
+                        Project Name
+                      </label>
+                      <input
+                        id="title"
+                        name="name"
+                        type="text"
+                        className="form-control"
+                        onChange={formik.handleChange}
+                        value={formik.values.name}
+                      />
 
-                  <p className="invalid-data">
-                    {formik.errors.name && formik.touched.name
-                      ? formik.errors.name
-                      : null}
-                  </p>
-                </div>
+                      <p className="invalid-data">
+                        {formik.errors.name && formik.touched.name
+                          ? formik.errors.name
+                          : null}
+                      </p>
+                    </div>
 
-                <div className="mb-3">
-                  <label htmlFor="title" className="form-label">
-                    Project Description
-                  </label>
-                  <textarea
-                    id="title"
-                    name="description"
-                    type="text"
-                    className="form-control"
-                    onChange={formik.handleChange}
-                    value={formik.values.description}
-                  />
+                    <div className="mb-3">
+                      <label htmlFor="title" className="form-label">
+                        Project Description
+                      </label>
+                      <textarea
+                        id="title"
+                        name="description"
+                        type="text"
+                        className="form-control"
+                        onChange={formik.handleChange}
+                        value={formik.values.description}
+                      />
 
-                  <p className="invalid-data">
-                    {formik.errors.description && formik.touched.description
-                      ? formik.errors.description
-                      : null}
-                  </p>
-                </div>
+                      <p className="invalid-data">
+                        {formik.errors.description && formik.touched.description
+                          ? formik.errors.description
+                          : null}
+                      </p>
+                    </div>
 
-                <div className="mb-3">
-                  <label htmlFor="members" className="form-label">
-                    Add Team Members
-                  </label>
+                    <div className="mb-3">
+                      <label htmlFor="members" className="form-label">
+                        Add Team Members
+                      </label>
 
-                  <select
-                    multiple
-                    name="members"
-                    id="members"
-                    className="form-control"
-                    value={formik.values.members}
-                    onChange={formik.handleChange}
-                  >
-                    {allMembers.map((member, key) => (
-                      <option key={key} value={key + 1}>
-                        {member.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </form>
-            }
-            modalFooterBtn={
-              <>
-                <button
-                  data-bs-dismiss="modal"
-                  className="secondary-btn"
-                  onClick={formik.resetForm}
-                >
-                  Close
-                </button>
+                      <select
+                        multiple
+                        name="members"
+                        id="members"
+                        className="form-control"
+                        value={formik.values.members}
+                        onChange={formik.handleChange}
+                      >
+                        {allMembers.map((member, key) => (
+                          <option key={key} value={key + 1}>
+                            {member.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </form>
+                }
+                modalFooterBtn={
+                  <>
+                    <button
+                      data-bs-dismiss="modal"
+                      className="secondary-btn"
+                      onClick={formik.resetForm}
+                    >
+                      Close
+                    </button>
 
-                <button
-                  type="submit"
-                  className="primary-btn"
-                  onClick={formik.handleSubmit}
-                  data-bs-dismiss={
-                    formik.isValid && formik.dirty ? "modal" : null
-                  }
-                >
-                  Next
-                </button>
-              </>
-            }
-          />
-        </div>
+                    <button
+                      type="submit"
+                      className="primary-btn"
+                      onClick={formik.handleSubmit}
+                      data-bs-dismiss={
+                        formik.isValid && formik.dirty ? "modal" : null
+                      }
+                    >
+                      Next
+                    </button>
+                  </>
+                }
+              />
+            </div>
+          </>
+        ) : null}
       </div>
 
       <div className="con-context">
