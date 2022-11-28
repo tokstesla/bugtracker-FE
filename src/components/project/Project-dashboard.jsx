@@ -174,13 +174,17 @@ function Project({ allMembers, payload }) {
           <div className="">
             <div>
               No Projects to show. &nbsp;&nbsp;
-              <span
-                data-bs-toggle="modal"
-                data-bs-target="#new-project-create"
-                className="highlight"
-              >
-                Create New Project
-              </span>
+              {payload.role === "ADMIN" ? (
+                <>
+                  <span
+                    data-bs-toggle="modal"
+                    data-bs-target="#new-project-create"
+                    className="highlight"
+                  >
+                    Create New Project
+                  </span>
+                </>
+              ) : null}
             </div>
           </div>
         )}

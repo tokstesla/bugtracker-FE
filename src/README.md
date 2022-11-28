@@ -1,12 +1,12 @@
 <div align="center" id="top"> 
-  <img src="https://mufasa.interswitchng.com/p/favicons/favicon_isw.png" alt="Brickx" />
+  <img src="https://mufasa.interswitchng.com/p/favicons/favicon_isw.png" alt="Bug Tracker" />
 
 &#xa0;
 
-  <!-- <a href="https://brickx.netlify.app">Demo</a> -->
+  <!-- <a href="https://bugtracker.netlify.app">Demo</a> -->
 </div>
 
-<h1 align="center">Brickx</h1>
+<h1 align="center">BugTracker</h1>
 
 <p align="center">
   <img alt="Github top language" src="https://img.shields.io/github/languages/top/ifejeremiah/brickx?color=56BEB8">
@@ -27,7 +27,7 @@
 <!-- Status -->
 
 <h4 align="center"> 
-	🚧  Brickx 🚀 Under construction...  🚧
+	🚧  Bug Tracker 🚀 Under construction...  🚧
 </h4>
 
 <hr>
@@ -39,18 +39,18 @@
   <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
   <a href="#checkered_flag-starting">Starting</a> &#xa0; | &#xa0;
   <a href="#memo-license">License</a> &#xa0; | &#xa0;
-  <a href="https://github.com/ifejeremiah" target="_blank">Author</a>
+  <a href="https://github.com/tokstesla" target="_blank">Author</a>
 </p>
 
 <br>
 
 ## About
 
-A platform for connecting construction companies and contractors to local construction workers looking for short-term or long-term work.
+A web-based bug tracking system for project management.
 
 ## Features
 
-- User account and construction project creation.
+- User account, project creation and ticket generation.
 -
 
 ## Technologies
@@ -70,10 +70,10 @@ Before starting, you need to have [Git](https://git-scm.com) and [Node](https://
 
 ```bash
 # Clone this project
-$ git clone https://github.com/ifejeremiah/brickx
+$ git clone https://github.com/tokstesla/bugtracker-FE
 
 # Access
-$ cd brickx
+$ cd bugtracker-FE
 
 # Install dependencies
 $ yarn
@@ -88,7 +88,7 @@ $ yarn start
 
 This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
 
-Made with ❤️ by <a href="https://github.com/ifejeremiah" target="_blank">Ife Jeremiah</a>
+Made with ❤️ by <a href="https://github.com/tokstesla" target="_blank">Tochukwu Okeh</a>
 
 &#xa0;
 

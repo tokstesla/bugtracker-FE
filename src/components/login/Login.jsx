@@ -37,14 +37,14 @@ function Login({ authStatus }) {
       <div className="d-none d-lg-block col-lg-7 position-relative">
         <div className="img">
           <img
-            src="https://plus.unsplash.com/premium_photo-1663054710563-598f084bdd42?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1163&q=80"
+            src="https://images.unsplash.com/photo-1603347729548-6844517490c7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
             alt=""
           />
         </div>
         <div className="overlay"></div>
         <div className="con-context">
           <h2 className="logo">
-            <Link to="/">BrickX.</Link>
+            <Link to="/">Bug Tracker.</Link>
           </h2>
         </div>
       </div>
@@ -61,7 +61,7 @@ function Login({ authStatus }) {
 
             {query.get("__lgn") === "vlan" && !message ? (
               <div className="success-msg">
-                You are now registered and can login.
+                You are now registered! Go ahead and login.
               </div>
             ) : (
               ""

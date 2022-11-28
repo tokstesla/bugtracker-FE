@@ -12,18 +12,18 @@ function Homepage() {
   const sectionACardData = [
     {
       icon: "fa-solid fa-user-gear",
-      title: "Select type of worker",
-      body: "Simply select the type of skilled worker needed, along with tools required & job description",
+      title: "Account Creation",
+      body: "Fill in the required details and click on the sign up button. Easy-peasy.",
     },
     {
       icon: "fa-solid fa-clock-rotate-left",
-      title: "View matches",
-      body: "You will receive a list of workers that are available & interested in your request",
+      title: "View Projects",
+      body: "You will be able to see the projects and tickets you have been assigned to work on.",
     },
     {
       icon: "fa-solid fa-users",
-      title: "Choose the best",
-      body: "View ratings, reviews, skill & experience in workers profiles before confirming the best worker for the job",
+      title: "Ticket Creation",
+      body: "You can generate tickets for bugs found during projects and also make suggestions for features.",
     },
   ];
 
@@ -41,7 +41,7 @@ function Homepage() {
     {
       title: "Dedicated Support",
       content:
-        "Our team is dedicated to making sure your worker needs are met & are always available to help.",
+        "Our team is dedicated to making sure your software is working smoothly.",
     },
     {
       title: "Saves You Time",
@@ -61,7 +61,7 @@ function Homepage() {
       <div className="con-container">
         <div className="img-bg">
           <img
-            src="https://images.unsplash.com/photo-1546552356-3fae876a61ca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=876&q=80"
+            src="https://images.pexels.com/photos/735911/pexels-photo-735911.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
             alt=""
           />
         </div>
@@ -71,7 +71,7 @@ function Homepage() {
           <nav className="con-navbar d-flex align-items-center justify-content-between">
             <div className="con-left">
               <h3 className="logo">
-                <Link to="/">BrickX</Link>
+                <Link to="/">Bug Tracker</Link>
               </h3>
             </div>
 
@@ -90,8 +90,7 @@ function Homepage() {
           <div className="section-a d-flex align-items-center justify-content-center">
             <div className="con-top text-center">
               <h2>
-                Connect to thousands of verified construction workers over our
-                network.
+              A scalable bug tracking system that assists you in managing bugs easily and delivering great products in time.
               </h2>
               <button className="header-btn" onClick={gotoGetStart}>
                 Get Started
@@ -104,7 +103,7 @@ function Homepage() {
       <div className="con-section" ref={ServicesRef}>
         <div className="section-b">
           <div className="header mb-5">
-            <h2>How BrickX works</h2>
+            <h2>How Bug Tracker works</h2>
           </div>
           <div className="con-card">
             {sectionACardData.map((elem, key) => (
@@ -138,7 +137,7 @@ function Homepage() {
             <div className="col-12 col-lg-6">
               <div className="img">
                 <img
-                  src="https://images.unsplash.com/photo-1592890288687-961242c04db8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+                  src="https://images.pexels.com/photos/735911/pexels-photo-735911.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                   alt=""
                 />
               </div>
@@ -149,13 +148,11 @@ function Homepage() {
         <div className="section-d con-centered sections">
           <div className="con-top text-center">
             <div className="header mb-5">
-              <h2 className="title">Why BrickX?</h2>
+              <h2 className="title">Why Bug Tracker?</h2>
             </div>
             <div className="body">
               <p className="mb-5">
-                BrickX is a marketplace connecting construction companies and
-                contractors to local construction workers looking for short-term
-                or long-term work.
+                Bug Tracker a web-based system where Bugs can be documented and managed.
               </p>
 
               <p>
@@ -181,45 +178,13 @@ function Homepage() {
             ))}
           </div>
         </div>
-
-        <div className="section-e">
-          <div>
-            <div className="title text-center">Trusted by</div>
-            <ul className="d-lg-flex align-items-center justify-content-center gap-4">
-              <li>
-                <img
-                  src="https://www.turnerconstruction.com/Content/Images/turner.gif"
-                  alt=""
-                />
-              </li>
-              <li>
-                <img
-                  src="https://www.fluor.com/images/common/fluor-logo.png"
-                  alt=""
-                />
-              </li>
-              <li>
-                <img
-                  src="https://cdn.cookielaw.org/logos/954c1905-a259-43cc-9bed-957b37438fc5/ba2b5afc-9d50-496a-a17e-efaa0be4a92b/7aa00331-c491-48cc-bfc8-6de827817517/skanska-logotype-blue-120x18.png"
-                  alt=""
-                />
-              </li>
-              <li>
-                <img
-                  src="https://www.emcorgroup.com/application/files/6816/1047/4820/EME_PMS_322K_white.svg"
-                  alt=""
-                />
-              </li>
-            </ul>
-          </div>
-        </div>
       </div>
 
       <footer className="con-footer">
         <div className="footer d-lg-flex align-items-start justify-content-center gap-5">
           <div className="mb-4 mb-lg-0">
             &copy; {new Date().getFullYear()}
-            &nbsp; BrickX, Inc.
+            &nbsp; Interswitch Bug Tracker.
           </div>
           <div className="d-lg-flex align-items-start gap-5">
             <ul className="mb-5 mb-lg-0">
@@ -232,9 +197,7 @@ function Homepage() {
               <li>
                 <Link to="/">Contact</Link>
               </li>
-              <li>
-                <Link to="/">Pricing</Link>
-              </li>
+              
             </ul>
             <ul className="mb-5 mb-lg-0">
               <li>
@@ -244,15 +207,13 @@ function Homepage() {
                 <Link to="/">Training</Link>
               </li>
               <li>
-                <Link to="/">Status</Link>
-              </li>
-              <li>
                 <Link to="/">Security</Link>
               </li>
             </ul>
+              
             <ul>
-              <li>
-                <Link to="/">Terms</Link>
+            <li>
+                <Link to="/">Pricing</Link>
               </li>
               <li>
                 <Link to="/">Privacy</Link>
