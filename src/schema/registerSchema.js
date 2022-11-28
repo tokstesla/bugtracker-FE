@@ -11,11 +11,11 @@ const registerData = {
 
 const registerValidationSchema = Yup.object().shape({
   firstName: Yup.string()
-    .required("First name is required")
-    .max(40, "First name must not exceed 40 characters"),
+    .matches(/^[a-zA-Z]+$/, "Invalid firstname")
+    .required("First name is required"),
   lastName: Yup.string()
-    .required("Last name is required")
-    .max(40, "Last name must not exceed 40 characters"),
+    .matches(/^[a-zA-Z]+$/, "Invalid lastname")
+    .required("Last name is required"),
   email: Yup.string().email().required("Email is required"),
   phoneNumber: Yup.string()
     .matches(

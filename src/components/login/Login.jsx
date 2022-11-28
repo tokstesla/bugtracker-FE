@@ -25,7 +25,7 @@ function Login({ authStatus }) {
       service.doLogin({ email, password }).then(
         (res) => {
           authStatus(res.accessToken);
-          navigate({ pathname: "/overview" });
+          navigate({ pathname: "/dashboard" });
         },
         (err) => service.handleLoginError(err, setMsg)
       );

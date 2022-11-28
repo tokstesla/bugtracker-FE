@@ -47,7 +47,7 @@ function Teams({ allMembers, allUsers, addMembers, payload }) {
                         value={teamsForm.values.assigned_devs}
                         onChange={teamsForm.handleChange}
                       >
-                        {allUsers.map((member, key) => (
+                        {allUsers?.map((member, key) => (
                           <option key={key} value={key + 1}>
                             {member.name}
                           </option>
@@ -97,14 +97,18 @@ function Teams({ allMembers, allUsers, addMembers, payload }) {
                 </tr>
               </thead>
               <tbody>
-                {allMembers.map((elem, key) => (
-                  <tr key={key}>
-                    <td>{key + 1}</td>
-                    <td>{elem.name}</td>
-                    <td>{elem.email}</td>
-                    <td>{elem.phoneNumber}</td>
-                  </tr>
-                ))}
+                {allMembers?.length > 0 ? (
+                  <>
+                    {allMembers.map((elem, key) => (
+                      <tr key={key}>
+                        <td>{key + 1}</td>
+                        <td>{elem.name}</td>
+                        <td>{elem.email}</td>
+                        <td>{elem.phoneNumber}</td>
+                      </tr>
+                    ))}
+                  </>
+                ) : null}
               </tbody>
             </table>
           </div>

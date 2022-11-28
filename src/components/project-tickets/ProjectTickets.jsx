@@ -9,10 +9,12 @@ function ProjectTickets({
   allUsers,
   addMembers,
   payload,
+  hasPrevious,
 }) {
   return (
     <div id="ProjectTickets_Main_Container" className="component-container">
-      <Previous />
+      {hasPrevious && <Previous />}
+
       <div className="con-context d-lg-flex align-items-start justify-content-start mt-5">
         <div className="me-lg-4 mb-5 mb-lg-0">
           <Teams

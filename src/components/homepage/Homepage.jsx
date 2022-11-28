@@ -122,11 +122,9 @@ function Homepage() {
           <div className="d-lg-flex align-items-center">
             <div className="col-12 col-lg-6 mb-5 mb-lg-0">
               <div>
-                <h1 className="title">Worker ratings and reviews</h1>
+                <h1 className="title">Why Bug Tracker?</h1>
                 <p className="body mb-5">
-                  Worker profiles with ratings and reviews from past contractors
-                  gives you the assurance to select the highest quality workers
-                  for your projects.
+                As a web-based system where Bugs can be documented and managed, it is quickly accessible and easy to maintain.
                 </p>
 
                 <Link to="/register">
@@ -142,40 +140,6 @@ function Homepage() {
                 />
               </div>
             </div>
-          </div>
-        </div>
-
-        <div className="section-d con-centered sections">
-          <div className="con-top text-center">
-            <div className="header mb-5">
-              <h2 className="title">Why Bug Tracker?</h2>
-            </div>
-            <div className="body">
-              <p className="mb-5">
-                Bug Tracker a web-based system where Bugs can be documented and managed.
-              </p>
-
-              <p>
-                Your construction projects get matched to verified worker
-                profiles based on skill, experience and location. The connection
-                & payroll is all handled through the BrickX platform to bring
-                accountability and transparency to the construction industry.
-              </p>
-            </div>
-          </div>
-
-          <div className="con-bottom row">
-            {sectionDCardData.map((elem, key) => (
-              <div
-                className="col-12 col-lg-3 text-center mb-4 mb-lg-0"
-                key={key}
-              >
-                <div className="section-d-card">
-                  <div className="title">{elem.title}</div>
-                  <div className="body">{elem.content}</div>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </div>

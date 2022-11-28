@@ -84,7 +84,7 @@ function App() {
     console.log("value of values", values);
   }
 
-  const tickets = [
+  const [tickets, setTickets] = useState([
     {
       title: "ticket 1",
       description: "First ticket created",
@@ -100,7 +100,7 @@ function App() {
       description: "First ticket created",
       author: "Banky Mono",
     },
-  ];
+  ]);
 
   function getPayload() {
     if (isAuthenticated && token !== null) {
@@ -154,7 +154,13 @@ function App() {
             <Route
               path="/dashboard"
               element={
-                <Project allMembers={allMembers} payload={getPayload()} />
+                <Project
+                  allMembers={allMembers}
+                  payload={getPayload()}
+                  allTickets={tickets}
+                  allUsers={allUsers}
+                  addMembers={doSetAllMembers}
+                />
               }
             />
             <Route
@@ -166,6 +172,7 @@ function App() {
                   allUsers={allUsers}
                   addMembers={doSetAllMembers}
                   payload={getPayload()}
+                  hasPrevious={true}
                 />
               }
             />
@@ -173,10 +180,15 @@ function App() {
               path="/tickets"
               element={<Tickets allMembers={allMembers} allTickets={tickets} />}
             />
-            <Route path="/administration" element={<Admin />} />
+            <Route
+              path="/administration"
+              element={<Admin allUsers={allUsers} />}
+            />
             <Route
               path="/projects/tickets/id"
-              element={<ProjectData allMembers={allMembers} payload={getPayload()}/>}
+              element={
+                <ProjectData allMembers={allMembers} payload={getPayload()} />
+              }
             />
             <Route
               path="/my-profile"
