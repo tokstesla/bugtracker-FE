@@ -18,7 +18,7 @@ function Login({ authStatus }) {
       setMsg("Fill in all fields");
     } else callback();
   }
-
+ 
   function submit(evt) {
     evt.preventDefault();
     validate(() => {
@@ -53,15 +53,15 @@ function Login({ authStatus }) {
         <div className="con-right d-flex align-items-center justify-content-center">
           <div className="right px-3 px-lg-0">
             <header className="mb-3">
-              <h3 className="bold">Welcome Back !</h3>
-              <p className="text-ash-color">Sign in to continue</p>
+              <h3 className="bold">Welcome Back</h3>
+              <p className="text-ash-color">Please sign in to continue</p>
             </header>
 
             {message ? <p className="msg">{message}</p> : ""}
 
             {query.get("__lgn") === "vlan" && !message ? (
               <div className="success-msg">
-                You are now registered! Go ahead and login.
+                You are now registered! Now Go ahead and login.
               </div>
             ) : (
               ""

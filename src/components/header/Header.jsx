@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 import s from "./css/Header.module.sass";
 
-function Header({ logout, doToggle }) {
-  const username = "";
+function Header({ logout, doToggle, payload }) {
 
   return (
     <div className={`${s.header_container} mb-2`}>
@@ -35,7 +34,7 @@ function Header({ logout, doToggle }) {
               className={`${s.con_user_btn} d-none d-lg-flex gap-3 pointer align-items-center`}
             >
               <div className="user-profile-round d-none d-lg-flex gap-3 align-items-center">
-                {username ? <p>{username}</p> : ""}
+                {payload?.role ? <p>{payload?.role}</p> : "USER"}
                 <i className="fa-regular fa-user"></i>
               </div>
 

@@ -23,9 +23,9 @@ function Tickets({ allMembers, allTickets, payload }) {
 
   return (
     <>
-      <div id="Tickets_Main_Container">
+      <div id="Tickets_Main_Container" className="component-container">
         <div className="con-header d-flex align-items-center justify-content-between">
-          <div className="title">
+          <div className="title px-lg-4">
             <h2>Tickets</h2>
           </div>
 
@@ -228,7 +228,7 @@ function Tickets({ allMembers, allTickets, payload }) {
                         ticketForm.isValid && ticketForm.dirty ? "modal" : null
                       }
                     >
-                      Next
+                      Raise Ticket
                     </button>
                   </>
                 }
@@ -252,7 +252,7 @@ function Tickets({ allMembers, allTickets, payload }) {
                 <tbody>
                   {allTickets?.length > 0 ? (
                     <>
-                      {allTickets.map((elem, key) => (
+                      {allTickets?.map((elem, key) => (
                         <tr key={key}>
                           <td>
                             <Link to="/projects/tickets/id">{key + 1}</Link>

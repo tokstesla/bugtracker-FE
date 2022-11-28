@@ -10,22 +10,19 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import ProjectTickets from "components/project-tickets/ProjectTickets";
 
-function Project({ allMembers, payload, allTickets, allUsers, addMembers }) {
+function Project({
+  allMembers,
+  payload,
+  allTickets,
+  allUsers,
+  addMembers,
+  projects,
+  setProjects,
+}) {
   service.setPageTitle("Projects");
 
-  const [projects, setProject] = useState([]);
-
-  useEffect(() => {
-    async function getAllProjects() {
-      const projects = await service.getAllProjects();
-      setProject([...projects.content]);
-    }
-    getAllProjects();
-  }, []);
-
   async function onSubmit(values) {
-    setProject([values, ...projects]);
-    await service.createProject(values);
+    setProjects(values);
     formik.resetForm();
   }
 
@@ -36,9 +33,9 @@ function Project({ allMembers, payload, allTickets, allUsers, addMembers }) {
   });
 
   return (
-    <div className="component-container" id="Project-dashboard_Main_Container">
+    <div id="Project-dashboard_Main_Container">
       {payload.role === "ADMIN" ? (
-        <>
+        <div className="component-container">
           <div>
             <div className="con-header d-flex align-items-center justify-content-between">
               <div className="title">
@@ -148,7 +145,7 @@ function Project({ allMembers, payload, allTickets, allUsers, addMembers }) {
             </div>
 
             <div className="con-context">
-              {projects.length > 0 ? (
+              {projects?.length > 0 ? (
                 <div className=" table-responsive">
                   <table className="table">
                     <thead>
@@ -159,7 +156,7 @@ function Project({ allMembers, payload, allTickets, allUsers, addMembers }) {
                       </tr>
                     </thead>
                     <tbody>
-                      {projects.map((project, key) => (
+                      {projects?.map((project, key) => (
                         <tr key={key}>
                           <td>
                             <Link to="/projects/tickets">{key + 1}</Link>
@@ -197,9 +194,9 @@ function Project({ allMembers, payload, allTickets, allUsers, addMembers }) {
               )}
             </div>
           </div>
-        </>
+        </div>
       ) : (
-        <>
+        <div className="component-container">
           <ProjectTickets
             allUsers={allUsers}
             allMembers={allMembers}
@@ -207,7 +204,7 @@ function Project({ allMembers, payload, allTickets, allUsers, addMembers }) {
             payload={payload}
             allTickets={allTickets}
           />
-        </>
+        </div>
       )}
     </div>
   );

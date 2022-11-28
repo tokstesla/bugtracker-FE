@@ -1,7 +1,7 @@
 import Button from "components/button/Button";
 import { useFormik } from "formik";
-import React from "react";
 import { teamData } from "schema/teamsSchema";
+import './css/Teams.sass'
 
 function Teams({ allMembers, allUsers, addMembers, payload }) {
   async function onSubmit(values) {
@@ -17,9 +17,9 @@ function Teams({ allMembers, allUsers, addMembers, payload }) {
   });
 
   return (
-    <div id="Teams_Main_Container">
+    <div id="Teams_Main_Container" className="component-container">
       <div className="con-header d-flex align-items-center justify-content-between">
-        <div className="title">
+        <div className="title px-lg-4">
           <h2>Team</h2>
         </div>
 

@@ -64,6 +64,8 @@ function App() {
     },
   ]);
 
+  const [allProjects, setAllProjects] = useState([]);
+
   function doSetAllMembers(values) {
     console.log(
       "value of value",
@@ -80,8 +82,9 @@ function App() {
     console.log("new members", allMembers);
   }
 
-  function doSetAllUsers(values) {
-    console.log("value of values", values);
+  function doSetAllProjects(values) {
+    console.log(values);
+    setAllProjects([...allProjects, values]);
   }
 
   const [tickets, setTickets] = useState([
@@ -160,6 +163,8 @@ function App() {
                   allTickets={tickets}
                   allUsers={allUsers}
                   addMembers={doSetAllMembers}
+                  projects={allProjects}
+                  setProjects={doSetAllProjects}
                 />
               }
             />
