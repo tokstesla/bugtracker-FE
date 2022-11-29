@@ -6,6 +6,7 @@ import "./css/ProjectTickets.sass";
 function ProjectTickets({
   allMembers,
   allTickets,
+  setAllTickets,
   allUsers,
   addMembers,
   payload,
@@ -25,6 +26,7 @@ function ProjectTickets({
             allMembers={allMembers}
             allTickets={allTickets}
             payload={payload}
+            setAllTickets={setAllTickets}
           />
         </div>
 

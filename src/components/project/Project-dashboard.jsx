@@ -18,6 +18,7 @@ function Project({
   addMembers,
   projects,
   setProjects,
+  setAllTickets
 }) {
   service.setPageTitle("Projects");
 
@@ -96,7 +97,7 @@ function Project({
 
                           <div className="mb-3">
                             <label htmlFor="members" className="form-label">
-                              Add Team Members
+                              Add Available Users
                             </label>
 
                             <select
@@ -107,9 +108,9 @@ function Project({
                               value={formik.values.members}
                               onChange={formik.handleChange}
                             >
-                              {allMembers.map((member, key) => (
+                              {allUsers.map((user, key) => (
                                 <option key={key} value={key + 1}>
-                                  {member.name}
+                                  {user.name}
                                 </option>
                               ))}
                             </select>
@@ -134,7 +135,7 @@ function Project({
                               formik.isValid && formik.dirty ? "modal" : null
                             }
                           >
-                            Next
+                            Create
                           </button>
                         </>
                       }
@@ -203,6 +204,7 @@ function Project({
             addMembers={addMembers}
             payload={payload}
             allTickets={allTickets}
+            setAllTickets={setAllTickets}
           />
         </div>
       )}

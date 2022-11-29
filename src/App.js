@@ -7,7 +7,6 @@ import {
 import { useEffect, useState } from "react";
 
 import Template from "components/template/Template";
-import Overview from "components/overview/Overview";
 import Project from "components/project/Project-dashboard";
 import Profile from "components/profile/Profile";
 import Homepage from "components/homepage/Homepage";
@@ -30,90 +29,71 @@ function App() {
 
   const [allUsers, setAllUsers] = useState([
     {
-      name: "Ife Jeremiah",
+      name: "Barner Fremon",
       email: "0006@gmail.com",
-      phoneNumber: "1234567890",
+      phoneNumber: "07034567890",
     },
     {
       name: "Sack Smith",
       email: "0002@gmail.com",
-      phoneNumber: "1234567890",
+      phoneNumber: "0809067806",
     },
     {
       name: "Eli Jones",
       email: "0005@gmail.com",
-      phoneNumber: "1234567890",
-    },
-  ]);
-
-  const [allMembers, setAllMembers] = useState([
-    {
-      name: "John Doe",
-      email: "0001@gmail.com",
-      phoneNumber: "1234567890",
+      phoneNumber: "0804567891",
     },
     {
-      name: "Ali Halman",
-      email: "0003@gmail.com",
-      phoneNumber: "1234567890",
+      name: "Elon Musk",
+      email: "0009@gmail.com",
+      phoneNumber: "0903667872",
     },
     {
-      name: "Smith Abraham",
-      email: "0004@gmail.com",
-      phoneNumber: "1234567890",
+      name: "Burners Lee",
+      email: "0008@gmail.com",
+      phoneNumber: "0705467173",
     },
   ]);
 
   const [allProjects, setAllProjects] = useState([]);
+  const [allMembers, setAllMembers] = useState([]);
+  const [tickets, setTickets] = useState([]);
 
-  function doSetAllMembers(values) {
-    console.log(
-      "value of value",
-
-      values.assigned_devs.forEach((elem) =>
-        console.log("heewsdfdjslk", allUsers[Number(elem)])
-      )
-    );
-
+  const doSetAllMembers = (values) =>
     setAllMembers([
       ...allMembers,
-      values.assigned_devs.map((elem) => allUsers[Number(elem)]),
+      ...values.assigned_devs.map((id) => allUsers[id - 1]),
     ]);
-    console.log("new members", allMembers);
-  }
 
-  function doSetAllProjects(values) {
-    console.log(values);
+  const doSetAllProjects = (values) => {
     setAllProjects([...allProjects, values]);
-  }
+    setAllMembers([
+      ...allMembers,
+      ...values.members.map((id) => allUsers[id - 1]),
+    ]);
+  };
 
-  const [tickets, setTickets] = useState([
-    {
-      title: "ticket 1",
-      description: "First ticket created",
-      author: "John Doe",
-    },
-    {
-      title: "ticket 2",
-      description: "Second ticket created",
-      author: "John Smith",
-    },
-    {
-      title: "ticket 1",
-      description: "First ticket created",
-      author: "Banky Mono",
-    },
-  ]);
+  function doSetTickets(values) {
+    values.author = "User";
+    setTickets([...tickets, values]);
+  }
 
   function getPayload() {
     if (isAuthenticated && token !== null) {
-      const { role, user_id } = JSON.parse(atob(token.split(".")[1]));
-      return { role, user_id };
+      const {
+        role,
+        id: user_id,
+        firstName,
+        lastName,
+        email,
+      } = JSON.parse(token);
+      console.log("value of role in app", role);
+      return { role, user_id, firstName, lastName, email };
     }
   }
 
   function setAuthEnv(token) {
-    localStorage.setItem("auth-token", token);
+    localStorage.setItem("auth-token", JSON.stringify(token));
     setIsAuthenticated(true);
   }
 
@@ -165,6 +145,7 @@ function App() {
                   addMembers={doSetAllMembers}
                   projects={allProjects}
                   setProjects={doSetAllProjects}
+                  setAllTickets={doSetTickets}
                 />
               }
             />
@@ -178,6 +159,7 @@ function App() {
                   addMembers={doSetAllMembers}
                   payload={getPayload()}
                   hasPrevious={true}
+                  setAllTickets={doSetTickets}
                 />
               }
             />

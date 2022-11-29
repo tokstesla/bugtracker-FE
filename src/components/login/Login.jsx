@@ -24,7 +24,7 @@ function Login({ authStatus }) {
     validate(() => {
       service.doLogin({ email, password }).then(
         (res) => {
-          authStatus(res.accessToken);
+          authStatus(res);
           navigate({ pathname: "/dashboard" });
         },
         (err) => service.handleLoginError(err, setMsg)

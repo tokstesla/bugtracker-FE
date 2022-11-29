@@ -5,13 +5,12 @@ import { ticketData, ticketValidationSchema } from "schema/ticketSchema";
 import service from "services/service";
 import "./css/Ticket.sass";
 
-function Tickets({ allMembers, allTickets, payload }) {
-  console.log('value of members', allTickets)
+function Tickets({ allMembers, allTickets, payload, setAllTickets }) {
   service.setPageTitle("Tickets");
   async function onSubmit(values) {
-    console.log(JSON.stringify(values, null, 2));
+    // console.log(JSON.stringify(values, null, 2));
     // await service.createProject(values);
-    // setProject([values, ...projects]);
+    setAllTickets(values)
     ticketForm.resetForm();
   }
 
