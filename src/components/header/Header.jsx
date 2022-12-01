@@ -34,7 +34,7 @@ function Header({ logout, doToggle, payload }) {
               className={`${s.con_user_btn} d-none d-lg-flex gap-3 pointer align-items-center`}
             >
               <div className="user-profile-round d-none d-lg-flex gap-3 align-items-center">
-                {payload?.role ? <p>{payload?.role}</p> : "USER"}
+                {payload?.firstName ? <p>{payload?.firstName}</p> : "USER"}
                 <i className="fa-regular fa-user"></i>
               </div>
 
