@@ -21,40 +21,14 @@ import Requests from "components/requests/Requests";
 import Tickets from "components/tickets/Tickets";
 import Admin from "components/Admin/Admin";
 import ProjectTickets from "components/project-tickets/ProjectTickets";
+import service from "services/service";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   const token = localStorage.getItem("auth-token");
 
-  const [allUsers, setAllUsers] = useState([
-    {
-      name: "Barner Fremon",
-      email: "0006@gmail.com",
-      phoneNumber: "07034567890",
-    },
-    {
-      name: "Sack Smith",
-      email: "0002@gmail.com",
-      phoneNumber: "0809067806",
-    },
-    {
-      name: "Eli Jones",
-      email: "0005@gmail.com",
-      phoneNumber: "0804567891",
-    },
-    {
-      name: "Elon Musk",
-      email: "0009@gmail.com",
-      phoneNumber: "0903667872",
-    },
-    {
-      name: "Burners Lee",
-      email: "0008@gmail.com",
-      phoneNumber: "0705467173",
-    },
-  ]);
-
+  const [allUsers, setAllUsers] = useState([]);
   const [allProjects, setAllProjects] = useState([]);
   const [allMembers, setAllMembers] = useState([]);
   const [tickets, setTickets] = useState([]);
@@ -62,19 +36,16 @@ function App() {
   const doSetAllMembers = (values) =>
     setAllMembers([
       ...allMembers,
-      ...values.assigned_devs.map((id) => allUsers[id - 1]),
+      ...values.assigned_devs?.map((id) => allUsers[id - 1]),
     ]);
 
   const doSetAllProjects = (values) => {
     setAllProjects([...allProjects, values]);
-    setAllMembers([
-      ...allMembers,
-      ...values.members.map((id) => allUsers[id - 1]),
-    ]);
+    setAllMembers([...values.members.map((id) => allUsers[id - 1])]);
+    console.log('value of members', allProjects)
   };
 
   function doSetTickets(values) {
-    values.author = "User";
     setTickets([...tickets, values]);
   }
 
@@ -87,7 +58,6 @@ function App() {
         lastName,
         email,
       } = JSON.parse(token);
-      console.log("value of role in app", role);
       return { role, user_id, firstName, lastName, email };
     }
   }
@@ -100,6 +70,10 @@ function App() {
   function doLogout() {
     localStorage.removeItem("auth-token");
     setIsAuthenticated(false);
+  }
+
+  function getAllUsers() {
+    service.getAllUsers().then((users) => setAllUsers([...users]));
   }
 
   useEffect(() => {
@@ -115,7 +89,10 @@ function App() {
     //     setIsAuthenticated(true);
     //   }
     // }
-    else setIsAuthenticated(true);
+    else {
+      setIsAuthenticated(true);
+      getAllUsers();
+    }
   }, [token]);
 
   return (
@@ -150,9 +127,10 @@ function App() {
               }
             />
             <Route
-              path="/projects/tickets"
+              path="/projects/tickets/:projectid"
               element={
                 <ProjectTickets
+                  allProjects={allProjects}
                   allMembers={allMembers}
                   allTickets={tickets}
                   allUsers={allUsers}
@@ -172,9 +150,9 @@ function App() {
               element={<Admin allUsers={allUsers} />}
             />
             <Route
-              path="/projects/tickets/id"
+              path="/projects/tickets/id/:ticketId"
               element={
-                <ProjectData allMembers={allMembers} payload={getPayload()} />
+                <ProjectData allMembers={allMembers} allTickets={tickets} payload={getPayload()} />
               }
             />
             <Route

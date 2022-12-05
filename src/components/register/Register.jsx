@@ -15,7 +15,6 @@ function Register() {
   const navigate = useNavigate();
 
   function onSubmit(values) {
-    console.log(JSON.stringify(values, null, 2));
     service.doRegister(values).then(
       (res) => {
         formik.resetForm();

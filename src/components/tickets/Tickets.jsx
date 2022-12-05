@@ -7,11 +7,12 @@ import "./css/Ticket.sass";
 
 function Tickets({ allMembers, allTickets, payload, setAllTickets }) {
   service.setPageTitle("Tickets");
+
   async function onSubmit(values) {
-    // console.log(JSON.stringify(values, null, 2));
-    // await service.createProject(values);
-    setAllTickets(values)
-    ticketForm.resetForm();
+    values.author = service.getPayload().email;
+    values.ticketId = service.getRandomId();
+    setAllTickets(values);
+    // ticketForm.resetForm();
   }
 
   const ticketForm = useFormik({
@@ -96,7 +97,8 @@ function Tickets({ allMembers, allTickets, payload, setAllTickets }) {
                           >
                             {allMembers.map((member, key) => (
                               <option key={key} value={key + 1}>
-                                {member.name}
+                                {member.firstName}&nbsp;
+                                {member.lastName}
                               </option>
                             ))}
                           </select>
@@ -254,18 +256,18 @@ function Tickets({ allMembers, allTickets, payload, setAllTickets }) {
                       {allTickets?.map((elem, key) => (
                         <tr key={key}>
                           <td>
-                            <Link to="/projects/tickets/id">{key + 1}</Link>
+                            <Link to={`/projects/tickets/id/${elem.ticketId}`}>{key + 1}</Link>
                           </td>
                           <td>
-                            <Link to="/projects/tickets/id">{elem.title}</Link>
+                            <Link to={`/projects/tickets/id/${elem.ticketId}`}>{elem.title}</Link>
                           </td>
                           <td>
-                            <Link to="/projects/tickets/id">
+                            <Link to={`/projects/tickets/id/${elem.ticketId}`}>
                               {elem.description}
                             </Link>
                           </td>
                           <td>
-                            <Link to="/projects/tickets/id">{elem.author}</Link>
+                            <Link to={`/projects/tickets/id/${elem.ticketId}`}>{elem.author}</Link>
                           </td>
                         </tr>
                       ))}

@@ -4,10 +4,8 @@ import Button from "components/button/Button";
 import { projectSchema, projectData } from "schema/projectValidate";
 import "./css/Project.sass";
 
-import { useState } from "react";
 import service from "services/service";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
 import ProjectTickets from "components/project-tickets/ProjectTickets";
 
 function Project({
@@ -18,13 +16,20 @@ function Project({
   addMembers,
   projects,
   setProjects,
-  setAllTickets
+  setAllTickets,
 }) {
   service.setPageTitle("Projects");
 
   async function onSubmit(values) {
-    setProjects(values);
-    formik.resetForm();
+    values.projectId = service.getRandomId();
+    console.log("create project values", JSON.stringify(values, null, 2));
+    service.createProject(values).then(
+      () => {
+        setProjects(values);
+        // formik.resetForm();
+      },
+      (err) => console.log("Error creating project", err)
+    );
   }
 
   const formik = useFormik({
@@ -109,8 +114,9 @@ function Project({
                               onChange={formik.handleChange}
                             >
                               {allUsers.map((user, key) => (
-                                <option key={key} value={key + 1}>
-                                  {user.name}
+                                <option key={key} value={user.id}>
+                                  {user.firstName}&nbsp;
+                                  {user.lastName}
                                 </option>
                               ))}
                             </select>
@@ -160,13 +166,17 @@ function Project({
                       {projects?.map((project, key) => (
                         <tr key={key}>
                           <td>
-                            <Link to="/projects/tickets">{key + 1}</Link>
+                            <Link to={`/projects/tickets/${project.projectId}`}>
+                              {key + 1}
+                            </Link>
                           </td>
                           <td>
-                            <Link to="/projects/tickets">{project.name}</Link>
+                            <Link to={`/projects/tickets/${project.projectId}`}>
+                              {project.name}
+                            </Link>
                           </td>
                           <td>
-                            <Link to="/projects/tickets">
+                            <Link to={`/projects/tickets/${project.projectId}`}>
                               {project.description}
                             </Link>
                           </td>

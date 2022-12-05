@@ -3,20 +3,16 @@ import Previous from "components/previous/Previous";
 import { useFormik } from "formik";
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import service from "services/service";
 import "./css/Project-data.sass";
 
-function ProjectData({ allMembers, payload }) {
-  const [tickets, setTickets] = useState({
-    title: "Ticket 1",
-    description: "first ticket",
-    status: "IN_PROGRESS",
-    date: "24",
-    priority: "IMMEDIATE",
-    type: "ERROR",
-    assigned_devs: [],
-  });
+function ProjectData({ allMembers, payload, allTickets }) {
+  const { ticketId } = useParams();
+
+  const [tickets, setTickets] = useState(
+    ...allTickets.filter((ticket) => ticket.ticketId == ticketId)
+  );
 
   service.setPageTitle(tickets.title);
 
@@ -105,7 +101,8 @@ function ProjectData({ allMembers, payload }) {
                           >
                             {allMembers.map((member, key) => (
                               <option key={key} value={key + 1}>
-                                {member.name}
+                                {member.firstName}&nbsp;
+                                {member.lastName}
                               </option>
                             ))}
                           </select>

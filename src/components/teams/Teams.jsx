@@ -1,13 +1,10 @@
 import Button from "components/button/Button";
 import { useFormik } from "formik";
 import { teamData } from "schema/teamsSchema";
-import './css/Teams.sass'
+import "./css/Teams.sass";
 
 function Teams({ allMembers, allUsers, addMembers, payload }) {
-
   async function onSubmit(values) {
-    // console.log(JSON.stringify(values, null, 2));
-    // await service.createProject(values);
     addMembers(values);
     teamsForm.resetForm();
   }
@@ -31,7 +28,7 @@ function Teams({ allMembers, allUsers, addMembers, payload }) {
                 type="primary"
                 text="New Member"
                 modal
-                modalHeaderTitle="Create New Ticket"
+                modalHeaderTitle="Add New Members"
                 modalTarget="new-member-create"
                 modalContext={
                   <form className="my-4">
@@ -50,7 +47,8 @@ function Teams({ allMembers, allUsers, addMembers, payload }) {
                       >
                         {allUsers?.map((member, key) => (
                           <option key={key} value={key + 1}>
-                            {member.name}
+                            {member.firstName}&nbsp;
+                            {member.lastName}
                           </option>
                         ))}
                       </select>
@@ -92,7 +90,8 @@ function Teams({ allMembers, allUsers, addMembers, payload }) {
               <thead>
                 <tr className="header-row">
                   <th scope="col">#</th>
-                  <th scope="col">Name</th>
+                  <th scope="col">First Name</th>
+                  <th scope="col">Last Name</th>
                   <th scope="col">Email</th>
                   <th scope="col">Phone</th>
                 </tr>
@@ -103,7 +102,8 @@ function Teams({ allMembers, allUsers, addMembers, payload }) {
                     {allMembers.map((elem, key) => (
                       <tr key={key}>
                         <td>{key + 1}</td>
-                        <td>{elem.name}</td>
+                        <td>{elem.firstName}</td>
+                        <td>{elem.lastName}</td>
                         <td>{elem.email}</td>
                         <td>{elem.phoneNumber}</td>
                       </tr>

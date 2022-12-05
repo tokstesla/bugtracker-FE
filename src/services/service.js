@@ -22,10 +22,18 @@ const service = {
   getPayload: () => {
     const token = localStorage.getItem("auth-token");
     if (token !== null) {
-      const { role, user_id } = JSON.parse(atob(token.split(".")[1]));
-      return { role, user_id };
+      const {
+        role,
+        id: user_id,
+        email,
+        firstName,
+        lastName,
+      } = JSON.parse(token);
+      return { role, user_id, email, firstName, lastName };
     }
   },
+
+  getRandomId: () => Math.floor(Math.random() * 1000),
 
   doLogin: async (postBody) => {
     const res = await axios.post(_routes.login, postBody);
@@ -46,17 +54,17 @@ const service = {
   },
 
   createProject: async (postBody) => {
-    const res = await axios.post(
-      `${_routes.projects}/${service.getPayload().user_id}/projects`,
-      postBody
-    );
+    const res = await axios.post(`${_routes.member}/projects`, postBody);
     return res.data;
   },
 
   getAllProjects: async () => {
-    const res = await axios.get(
-      `${_routes.projects}/${service.getPayload().user_id}/projects`
-    );
+    const res = await axios.get(`${_routes.member}/projects`);
+    return res.data;
+  },
+
+  getAllUsers: async () => {
+    const res = await axios.get(`${_routes.members}`);
     return res.data;
   },
 };

@@ -1,10 +1,12 @@
 import Previous from "components/previous/Previous";
 import Teams from "components/teams/Teams";
 import Tickets from "components/tickets/Tickets";
+import { useParams } from "react-router-dom";
 import "./css/ProjectTickets.sass";
 
 function ProjectTickets({
   allMembers,
+  allProjects,
   allTickets,
   setAllTickets,
   allUsers,

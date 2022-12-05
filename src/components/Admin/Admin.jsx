@@ -14,7 +14,8 @@ function Admin({allUsers}) {
                 <thead>
                   <tr className="header-row">
                     <th scope="col">#</th>
-                    <th scope="col">Name</th>
+                    <th scope="col">First name</th>
+                    <th scope="col">Last name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Phone</th>
                   </tr>
@@ -25,7 +26,8 @@ function Admin({allUsers}) {
                       {allUsers.map((elem, key) => (
                         <tr key={key}>
                           <td>{key + 1}</td>
-                          <td>{elem.name}</td>
+                          <td>{elem.firstName}</td>
+                          <td>{elem.lastName}</td>
                           <td>{elem.email}</td>
                           <td>{elem.phoneNumber}</td>
                         </tr>

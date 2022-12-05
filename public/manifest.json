@@ -1,6 +1,6 @@
 {
-  "short_name": "Brick X App",
-  "name": "Brick X",
+  "short_name": "Bug Tracker Web App",
+  "name": "Bug Tracker",
   "icons": [],
   "start_url": ".",
   "display": "standalone",
